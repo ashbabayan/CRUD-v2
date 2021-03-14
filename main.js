@@ -103,11 +103,7 @@ function createDeleteButton(){
     })
     return deleteButton 
 }
-function createUserRow(){
-    var userRow = document.createElement("tr")
-        userRow.classList.add("font")
-        return userRow
-}
+
 function append(column){
     userRow.appendChild(column)
 }
@@ -132,26 +128,33 @@ function createTime(){
     return time
 }
 
+function createUserRow(){
+    var userRow = document.createElement("tr")
+        userRow.classList.add("font")
+        var fullNameCell = document.createElement("td")
+        var cityNameCell = document.createElement("td")
+        data.forEach(row => {
+            fullNameCell.innerHTML = row.firstname + " " + row.lastname
+            cityNameCell.innerHTML = row.city
+            userRow.appendChild(fullNameCell)
+            userRow.appendChild(cityNameCell)
+        })
+        var date = createDate()
+        var time = createTime()
+        var actions = createActionsColumn()
+        userRow.appendChild(date)
+        userRow.appendChild(time)
+        userRow.appendChild(actions)
+        return userRow
+}
+
 function render(){
     while(table.rows.length>1){ 
         table.deleteRow(1)
     }
-    data.forEach(row => {
-        var userRow = createUserRow()
-        var fullNameCell = document.createElement("td")
-        var cityNameCell = document.createElement("td")
-        var date = createDate()
-        var time = createTime()
-        var actions = createActionsColumn()
-        fullNameCell.innerHTML = row.firstname + " " + row.lastname
-        cityNameCell.innerHTML = row.city
-        userRow.appendChild(fullNameCell)
-        userRow.appendChild(cityNameCell)
-        userRow.appendChild(date)
-        userRow.appendChild(time)
-        userRow.appendChild(actions)
-        table.appendChild(userRow)
-    })
+    var userRow = createUserRow()
+    table.appendChild(userRow)
+    
   }
 
   function addUser(){
