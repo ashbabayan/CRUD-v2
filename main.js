@@ -130,14 +130,6 @@ function createTime(){
     time.innerHTML = d.getHours() + ":" + d.getMinutes()
     return time
 }
-function appendChildren(){
-    userRow.appendChild(fullNameCell)
-    userRow.appendChild(cityNameCell)
-    userRow.appendChild(date)
-    userRow.appendChild(time)
-    userRow.appendChild(actions)
-    table.appendChild(userRow)
-}
 
 function render(){
     while(table.rows.length>1){ 
@@ -152,7 +144,12 @@ function render(){
         var actions = createActionsColumn()
         fullNameCell.innerHTML = row.firstname + " " + row.lastname
         cityNameCell.innerHTML = row.city
-appendChildren
+        userRow.appendChild(fullNameCell)
+        userRow.appendChild(cityNameCell)
+        userRow.appendChild(date)
+        userRow.appendChild(time)
+        userRow.appendChild(actions)
+        table.appendChild(userRow)
     })
   }
 
