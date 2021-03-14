@@ -107,9 +107,10 @@ function createUserRow(){
     var userRow = document.createElement("tr")
         userRow.classList.add("font")
         return userRow
-
 }
-
+function append(column){
+    userRow.appendChild(column)
+}
 function createActionsColumn(){
     var deleteButton = createDeleteButton()
     var editButton = createEditButton()
