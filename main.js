@@ -104,9 +104,6 @@ function createDeleteButton(){
     return deleteButton 
 }
 
-function append(column){
-    userRow.appendChild(column)
-}
 function createActionsColumn(){
     var deleteButton = createDeleteButton()
     var editButton = createEditButton()
