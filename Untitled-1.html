@@ -13,27 +13,29 @@
 
 </head>
 <body>
-    <p id="error_msg"class="hidden error_msg">All fields are required and should not contain numbers</p>
-    <div id="addRecordPopup" class="hidden Popup"> 
-        <form action="submit" class="flex_edit" onsubmit="addUser()">
+    <p id="error_msg" class="hidden error_msg"> <!-- id="error_msg" class="hidden error_msg" do not use same name for id and classes --> 
+        All fields are required and should not contain numbers
+    </p>
+    <div id="addRecordPopup" class="hidden Popup"> <!-- id="addRecordPopup" id="first_name_input" use only one type, (underscores are prefereable) -->
+        <div class="flex_edit"> <!-- use class="user-form-wrapper" -->
             <div class="block">
                 <p>First name:</p>
                 <input id="first_name_input" type="text" > 
             </div>
             <div class="block"> 
                 <p>Last Name:</p>
-                <input id="last_name_input" type="text" >
+                <input id="last_name_input" type="text">
             </div>
             <div class="block">
                 <p>City:</p>
                 <input id="city_input" type="text">
             </div>
-            <button id="add_action" class = "add_action">+Add</button>
-        </form>
+            <button id="add_action" class = "add_action" onclick="addUser()">+Add</button>
+        </div>
         <button class="close_popup" onclick="closePopUp()">Cancel</button>
     </div>
-    <div id="edit_record" class="hidden Popup">
-        <form action="submit" class="flex_edit" onsubmit="editRecord()">
+    <div id="edit_record" class="hidden Popup"> <!-- use proper naming for ids-->
+        <div class="flex_edit">
             <div class="block">
                 <p>First name:</p>
                 <input id="editable_first_name" type="text" placeholder="First Name"> 
@@ -46,14 +48,14 @@
                 <p>City:</p>
                 <input id="editable_city" type="text" placeholder="City">
             </div>
-            <button id="save_record" class = "add_action">Save</button>
-        </form>
+            <button id="save_record" class = "add_action" onclick="editRecord()">Save</button>
+        </div>
         <button class="close_popup" onclick="closeEditPopup()">Cancel</button>
     </div>
-<div id = "container">
+<div id="container">
     <div id="main_header" class='flex-row'>
         <p class="padding_left">Main List</p> 
-        <button id = "open_popup" class="padding_right" onclick="openPopup()"> <i class="fas fa-plus-circle"></i>  Add record</button>
+        <button id = "open_popup" class="padding_right" onclick="openPopup()"> <i class="fas fa-plus-circle"></i>  Add record</button> <!-- toxadardz ara, nesting-y pahi -->
     </div>
     <div id="search_container" class="flex-row "><p class="padding_left">Show</i>
         <select id="page_rows_count">
@@ -67,7 +69,10 @@
             <input type="text" onkeyup="search()"id="searchbox">
         </div>
     </div>
-    <p id="edited_error_msg"class="hidden edited_error_msg">All fields are required and should not contain numbers</p>
+    
+    <p id="edited_error_msg" class="hidden edited_error_msg">
+        All fields are required and should not contain numbers
+    </p>
 
     <div class="list">     
         <table id="main_list" class="main_list">
@@ -78,9 +83,8 @@
                 <th>Sign up Time</th>
                 <th>Action</th>
             </tr>
-            
         </table>
-        <p id = "no_data_msg"class="no_data_msg">No data</p>
+        <p id="no_data_msg" class="no_data_msg">No data</p>
         <!-- <div class="pagination flex-row">
             <p class="padding_left" id = "page_count">Page 1 out of 1</p>
             <div id="page_number"class="padding_right">

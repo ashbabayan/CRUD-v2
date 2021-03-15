@@ -20,26 +20,29 @@ function generateId(){
     idNumber++
     return lineId
 }
-function noData(){
-if(table.children.length>1){
-    noDataMsg.classList.add("hidden")
-}else if(table.children.length==1 && noDataMsg.classList.contains("hidden")){
-    noDataMsg.classList.remove("hidden")
+
+// use const or let instead of function() use const name = () => {}
+function noData(){ // change name to toggleErrorMessage -> anuny piti lini bay
+    if (table.children.length > 1) {
+        noDataMsg.classList.add("hidden")
+    } else if (table.children.length == 1 && noDataMsg.classList.contains("hidden")) {
+        noDataMsg.classList.remove("hidden")
+    }
 }
-}
-function clearInputValues(){
+
+function clearInputValues(){ // anuny dzel, ban chi asum
     firstNameInput.value = ""
     lastNameInput.value = ""
     cityNameInput.value = ""
 }
 
-function openPopup(){
+function openPopup(){ // anuny dzel, ban chi asum
     popUp.classList.remove("hidden")
     popUp.classList.add("flex")
     mainContainer.style.opacity = "0.1"
 }
 
-function closePopUp(){
+function closePopUp(){ // tabs, dzi, anuny dzel
     if(popUp.classList.contains("flex")){
         popUp.classList.add("hidden")
         popUp.classList.remove("flex")
@@ -53,7 +56,7 @@ function closePopUp(){
     }
 }
 
-function closeEditPopup(){
+function closeEditPopup(){ // tabs, dzi
     if(editPopup.classList.contains("flex")){
         editPopup.classList.add("hidden")
         editPopup.classList.remove("flex")
@@ -68,30 +71,30 @@ function closeEditPopup(){
 }
 
 const d = new Date();
-
 var data = []
 
- 
+function openEditPopup(){
+    //open edit popup
+    editPopup.classList.remove("hidden");
+    editPopup.classList.add("flex");
+    mainContainer.style.opacity = "0.1";
+    var rowIndex = (Array.prototype.indexOf.call(table.children, event.target.parentElement.parentElement)) // <- ahavor koda, poxel
+    // fill inputs with correct values
+    editableFirstNameInput.value = data[rowIndex -1].firstname
+    editableLastNameInput.value = data[rowIndex -1].lastname
+    editableCityInput.value = data[rowIndex -1].city
+}
 
-function createEditButton(){
+function createEditButton(index){ // use const instead, BOLOR texerum
     var editButton = document.createElement("button")
     editButton.innerHTML = '<i class="fa fa-edit"></i>'
     editButton.classList.add("actions_style")
     editButton.setAttribute("id", 'edit_action');
+    editButton.addEventListener("click", (e) => {
+        console.log(index);
+    })
     //function for clicking on edit button
     return editButton
-}
-
-function openEditPopup(){
-    //open edit popup
-editPopup.classList.remove("hidden");
-editPopup.classList.add("flex");
-mainContainer.style.opacity = "0.1";
-var rowIndex = (Array.prototype.indexOf.call(table.children, event.target.parentElement.parentElement))
-// fill inputs with correct values
-editableFirstNameInput.value = data[rowIndex -1].firstname
-editableLastNameInput.value = data[rowIndex -1].lastname
-editableCityInput.value = data[rowIndex -1].city
 }
 
 function createDeleteButton(){
@@ -99,14 +102,15 @@ function createDeleteButton(){
     deleteButton.innerHTML = '<i class="fa fa-trash">'
     deleteButton.classList.add("actions_style")
     deleteButton.setAttribute("id",'delete_action')
-    deleteButton.addEventListener("click", function deleteUser(){
+    deleteButton.addEventListener("click", function(){
+
     })
     return deleteButton 
 }
 
-function createActionsColumn(){
+function createActionsColumn(index){
     var deleteButton = createDeleteButton()
-    var editButton = createEditButton()
+    var editButton = createEditButton(index)
     var actions = document.createElement("td")
     actions.classList.add("actions")
     actions.appendChild(editButton)
@@ -127,21 +131,24 @@ function createTime(){
 
 function createUserRow(){
     var userRow = document.createElement("tr")
-        userRow.classList.add("font")
+        userRow.classList.add("font") // anuny poxel
         var fullNameCell = document.createElement("td")
         var cityNameCell = document.createElement("td")
-        data.forEach(row => {
+        data.forEach((row, index) => {
+            console.log(index);
             fullNameCell.innerHTML = row.firstname + " " + row.lastname
             cityNameCell.innerHTML = row.city
             userRow.appendChild(fullNameCell)
             userRow.appendChild(cityNameCell)
+
+            var date = createDate()
+            var time = createTime()
+            var actions = createActionsColumn(index)
+            userRow.appendChild(date)
+            userRow.appendChild(time)
+            userRow.appendChild(actions)
         })
-        var date = createDate()
-        var time = createTime()
-        var actions = createActionsColumn()
-        userRow.appendChild(date)
-        userRow.appendChild(time)
-        userRow.appendChild(actions)
+
         return userRow
 }
 
@@ -154,26 +161,20 @@ function render(){
     
   }
 
-  function addUser(){
-      event.preventDefault()
+  const addUser = () => {
     var user = { 
         firstname: firstNameInput.value,
         lastname: lastNameInput.value,
         city: cityNameInput.value
     }
 
-    data.push(user)
+    data.push(user);
+    console.log(data);
     render()
-    noData()
+    noData() // anuny poxel -> bay (voch goyakan)
     closePopUp()
 }
 
-function editRecord(){
-    event.preventDefault()
-
-
+const editRecord = () => {
+    
 }
-
-
-
-
