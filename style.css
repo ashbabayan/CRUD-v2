@@ -1,6 +1,7 @@
 *{
     outline: none;
     font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
 }
 body{
     margin:0 auto;
@@ -8,48 +9,43 @@ body{
     outline: none;
 }
 
-.padding_left{
+.align_from_left{
     padding-left:10px
 }
 
-.padding_right{
+.align_from_right{
     margin-right: 10px;
 }
 
-.flex-row{
+.container_row_style{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
-.flex{
+.popup_style{
     display:flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.flex_edit{
+.user_form_wrapper{    
     display:flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.main_container{
-    width:95%;
-    margin: 0 auto
-}
-
 #container{
-    width:100%;
+    width:95%;
     background-color: white;
     display: flex;
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin:20px 0;
+    margin:20px auto;
     opacity:1
 }
 
@@ -92,7 +88,7 @@ select{
     padding-right:15px
 }
 
-.no_data_msg{
+#no_data_msg{
     text-align: center;
     font-size: 16px;
     padding:10px 0;
@@ -100,12 +96,12 @@ select{
     border: 1px #dbdbdb solid;
 }
 
-.main_list{
+.users_list_container{
     width:100%;
     border-collapse: collapse;
 }
 
-.main_list tr,th,td{
+.users_list_container tr,th,td{
     text-align: left;
     border:1px #dbdbdb solid;
     height:30px;
@@ -114,7 +110,7 @@ select{
     font-weight: 500;
 }
 
-.block{
+.form_input{
     margin-bottom: 50px;
 }
 
@@ -129,7 +125,7 @@ select{
     text-align:center;
 }
 
-.Popup{
+.popup{
     position:absolute;
     width:90%;
     top:200px;
@@ -140,12 +136,12 @@ select{
     padding:20px 0;
 }
 
-.Popup form{
+.popup form{
     width:70%;
     margin-left:-7%
 }
 
-.Popup input{
+.popup input{
     width:80%;
     height:30px;
     padding-left:5px;
@@ -163,12 +159,12 @@ select{
     border-radius:5px;
 }
 
-.font td, .font th{
+.user_record td, .user_record th{
     font-weight: 300;
     color:#685e60
 }
 
-.close_popup{
+.close_popup_action{
     width:60px;
     height:35px;
     border:1px solid white;
@@ -177,7 +173,6 @@ select{
     color:white;
     cursor:pointer;
     align-self: center;
-    margin-left:-150px
 }
 
 .list{
