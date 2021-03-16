@@ -13,26 +13,26 @@ var editPopup = document.getElementById("edit_record_popup");
 var editableFirstNameInput = document.getElementById("editable_first_name");
 var editableLastNameInput = document.getElementById("editable_last_name");
 var editableCityInput = document.getElementById("editable_city");
-var searchInput = document.getElementById("searchbox")
-var numbers = /\d/
+var searchInput = document.getElementById("searchbox");
+var numbers = /\d/;
 const d = new Date();
 var data = [];
 var userIndex;
 
 const checkAddRecordValidation = () => {
-    return (!(firstNameInput.value && lastNameInput.value && cityNameInput.value))
+    return (!(firstNameInput.value && lastNameInput.value && cityNameInput.value));
 }
 
 const checkNumberValidation = () => {
-    return ((numbers.test(firstNameInput.value) || numbers.test(lastNameInput.value) || numbers.test(cityNameInput.value)))
+    return ((numbers.test(firstNameInput.value) || numbers.test(lastNameInput.value) || numbers.test(cityNameInput.value)));
 }
 
 const checkEditRecordValidation = () => {
-    return (!(editableFirstNameInput.value && editableLastNameInput.value && editableCityInput.value))
+    return (!(editableFirstNameInput.value && editableLastNameInput.value && editableCityInput.value));
 }
 
 const checkEditedNumberValidation = () => {
-    return (numbers.test(editableFirstNameInput.value) || numbers.test(editableLastNameInput.value) || numbers.test(editableCityInput.value))
+    return (numbers.test(editableFirstNameInput.value) || numbers.test(editableLastNameInput.value) || numbers.test(editableCityInput.value));
 }
 
 const toggleEmptyDataMsg = () => {
@@ -110,8 +110,8 @@ const createDeleteButton = (index) => {
         deleteButton.classList.add("actions_style");
         deleteButton.setAttribute("id",'delete_action');
         deleteButton.addEventListener("click", (e) => {
-            data.splice(index, 1)
-            render()
+            data.splice(index, 1);
+            render();
         })
     return deleteButton 
 }
@@ -174,7 +174,7 @@ const addUser = () => {
         city: cityNameInput.value
     }
     if (checkAddRecordValidation() || checkNumberValidation()) {
-        invalidAddErrorMsg.classList.remove("hidden")
+        invalidAddErrorMsg.classList.remove("hidden");
         return
     }
     data.push(user);
@@ -195,7 +195,7 @@ const editRecord = () => {
 }
 
 const search = () => {
-    const searchedData = data.filter(row  => {
+    const searchedData = data.filter (row  => {
        return row.firstname.toLowerCase().includes(searchInput.value.toLowerCase()) || row.lastname.toLowerCase().includes(searchInput.value.toLowerCase())
     })
     render(searchedData)
