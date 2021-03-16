@@ -186,11 +186,11 @@ const editRecord = () => {
     if (checkEditRecordValidation() || checkEditedNumberValidation()) {
         invalidEditErrorMsg.classList.remove("hidden")
         return
-    }
+    } 
     data[userIndex].firstname = editableFirstNameInput.value;
     data[userIndex].lastname = editableLastNameInput.value;
     data[userIndex].city = editableCityInput.value;
-    render();
+    render(data);
     closeEditPopup()
 }
 
