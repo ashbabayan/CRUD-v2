@@ -144,11 +144,11 @@ const createUserRow = () => {
     return userRow
 }
 
-const render = () => {
+const render = (data) => {
     while (table.rows.length > 1) { 
         table.deleteRow(1);
     }
-    data.forEach((row, index) => {
+    data.forEach ((row, index) => {
         var userRow = createUserRow()
         var fullNameCell = document.createElement("td");
         var cityNameCell = document.createElement("td");
@@ -178,12 +178,12 @@ const addUser = () => {
         return
     }
     data.push(user);
-    render();
+    render(data);
     closeAddRecordPopUp();
 }
 
 const editRecord = () => {
-    if(checkEditRecordValidation() || checkEditedNumberValidation()){
+    if (checkEditRecordValidation() || checkEditedNumberValidation()) {
         invalidEditErrorMsg.classList.remove("hidden")
         return
     }
@@ -192,4 +192,11 @@ const editRecord = () => {
     data[userIndex].city = editableCityInput.value;
     render();
     closeEditPopup()
+}
+
+const search = () => {
+    const searchedData = data.filter(row  => {
+       return row.firstname.toLowerCase().includes(searchInput.value.toLowerCase()) || row.lastname.toLowerCase().includes(searchInput.value.toLowerCase())
+    })
+    render(searchedData)
 }
