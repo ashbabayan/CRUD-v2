@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></head>
+    <script src="https://kit.fontawesome.com/3a0bcc5810.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;0,700;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <p id="validation_adding_error_message" class="hidden error_msg">
+        All fields are required and should not contain numbers
+    </p>
+
+    <div id="add_record_popup" class="hidden popup">
+        <div class="user_form_wrapper">
+            <div class="form_input">
+                <p>First name:</p>
+                <input id="first_name_input" type="text"> 
+            </div>
+            <div class="form_input"> 
+                <p>Last Name:</p>
+                <input id="last_name_input" type="text">
+            </div>
+            <div class="form_input">
+                <p>City:</p>
+                <input id="city_input" type="text">
+            </div>
+            <button id="add_action" class="add_action" onclick="addUser()">+Add</button>
+            <button class="close_popup_action" onclick="closeAddRecordPopUp()">Cancel</button>
+        </div>
+    </div>
+
+    <p id="validation_editing_error_message" class="hidden error_msg">
+        All fields are required and should not contain numbers
+    </p>
+
+    <div id="edit_record_popup" class="hidden popup">
+        <div class="user_form_wrapper">
+            <div class="form_input">
+                <p>First name:</p>
+                <input id="editable_first_name" type="text" placeholder="First Name"> 
+            </div>
+            <div class="form_input"> 
+                <p>Last Name:</p>
+                <input id="editable_last_name" type="text" placeholder="Last Name">
+            </div>
+            <div class="form_input">
+                <p>City:</p>
+                <input id="editable_city" type="text" placeholder="City">
+            </div>
+            <button id="save_record" class="add_action" onclick="editRecord()">Save</button>
+            <button class="close_popup_action" onclick="closeEditPopup()">Cancel</button>
+        </div>
+    </div>
+
+    <div id="container">
+        <div id="main_header" class="container_row_style">
+            <p class="align_from_left">Main List</p> 
+            <button id="open_popup" class="align_from_right" onclick="openAddRecordPopup()"> 
+                <i class="fas fa-plus-circle"></i> 
+                Add record
+            </button>
+        </div>
+        <div id="search_container" class="container_row_style">
+            <p class="align_from_left">
+                Show
+                <select id="page_rows_count">
+                    <option>5</option>
+                    <option>10</option>
+                    <option>20</option>
+                </select>
+                per page
+            </p>
+            <div class="container_row_style align_from_right search">
+                <p>Search:</p>
+                <input type="text" onkeyup="search()" id="searchbox">
+            </div>
+        </div>
+        
+        <p id="validation_editing_error_message" class="hidden edited_error_msg">
+            All fields are required and should not contain numbers
+        </p>
+
+        <div class="list">     
+            <table id="main_list" class="users_list_container">
+                <thead>
+                    <tr> 
+                        <th>Full Name</th>
+                        <th>City</th>
+                        <th>Sign up Date</th>
+                        <th>Sign up Time</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="table_body"></tbody>
+            </table>
+            <p id="no_data_msg">No data</p>
+            <!-- <div class="pagination flex-row">
+                <p class="align_from_left" id = "page_count">Page 1 out of 1</p>
+                <div id="page_number"class="align_from_right">
+                    <button><</button>
+                    <button>1</button>
+                    <button>></button>
+                </div> -->
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
