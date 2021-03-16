@@ -111,7 +111,7 @@ const createDeleteButton = (index) => {
         deleteButton.setAttribute("id",'delete_action');
         deleteButton.addEventListener("click", (e) => {
             data.splice(index, 1);
-            render();
+            render(data);
         })
     return deleteButton 
 }
