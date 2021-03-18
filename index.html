@@ -64,6 +64,20 @@
         </div>
     </div>
 
+    <div id="delete_confirmation_popup" class="hidden confirm_container">
+        <div class="confirm_popup">
+            <div class="confirm_header">          
+                <p class="confirm_title">Confirm</p>
+                <button class="close_confirm" onclick="closeConfirmPopup()">&times;</button>
+            </div>  
+            <p class="confirmation_content"><i class="fas fa-exclamation-triangle fa-3x"></i>Are you sure you want to delete this record ?</p>
+            <div class="confirm_popup_actions">
+                <button class="close_popup_action" onclick="closeConfirmPopup()">Cancel</button>
+                <button id="delete_record" class="delete_action" onclick="deleteRecord()">Delete</button>
+            </div>
+        </div>
+    </div>
+
     <div id="container">
         <div id="main_header" class="container_row_style">
             <p class="align_from_left">Main List</p> 

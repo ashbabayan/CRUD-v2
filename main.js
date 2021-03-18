@@ -6,6 +6,7 @@ var lastNameInput = document.getElementById("last_name_input");
 var cityNameInput = document.getElementById("city_input");
 var addBtn = document.getElementById("add_action");
 var popUp = document.getElementById("add_record_popup");
+var deleteConfirmPopup = document.getElementById("delete_confirmation_popup")
 var invalidAddErrorMsg = document.getElementById("validation_adding_error_message");
 var noDataMsg = document.getElementById("no_data_msg");
 var invalidEditErrorMsg = document.getElementById("validation_editing_error_message");
@@ -16,10 +17,16 @@ var editableCityInput = document.getElementById("editable_city");
 var searchInput = document.getElementById("searchbox");
 var pageRowsQty = document.getElementById("page_rows_count")
 var numbers = /\d/;
+
 const d = new Date();
 var data = [];
 var userIndex;
 
+
+
+const closeConfirmPopup = () => {
+    deleteConfirmPopup.classList.add("hidden")
+}
 const checkAddRecordValidation = () => {
     return (!(firstNameInput.value && lastNameInput.value && cityNameInput.value));
 }
@@ -52,6 +59,18 @@ const clearInputValues = () => {
     firstNameInput.value = "";
     lastNameInput.value = "";
     cityNameInput.value = "";
+}
+
+window.onclick = function(event) {
+    if (event.target == popUp) {
+        popUp.classList.add("hidden");
+        mainContainer.style.opacity= "1";
+        clearInputValues()        
+    } else if(event.target == deleteConfirmPopup) {
+        deleteConfirmPopup.classList.add("hidden");
+        mainContainer.style.opacity = "1";
+        clearInputValues()
+    }
 }
 
 const openAddRecordPopup = () => {
@@ -109,14 +128,20 @@ const createEditButton = (index) => {
     return editButton
 }
 
+const deleteRecord = (index) => {
+    data.splice(index, 1);
+            render(data);
+            closeConfirmPopup ()
+}
+
+
 const createDeleteButton = (index) => {
     var deleteButton = document.createElement("button");
         deleteButton.innerHTML = '<i class="fa fa-trash">';
         deleteButton.classList.add("actions_style");
         deleteButton.setAttribute("id",'delete_action');
         deleteButton.addEventListener("click", (e) => {
-            data.splice(index, 1);
-            render(data);
+            deleteConfirmPopup.classList.remove("hidden")
         })
     return deleteButton 
 }
@@ -205,4 +230,3 @@ const search = () => {
     })
     render(searchedData)
 }
-
