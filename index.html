@@ -12,12 +12,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;0,700;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <p id="validation_adding_error_message" class="hidden error_msg">
-        All fields are required and should not contain numbers
-    </p>
-
     <div id="add_record_popup" class="hidden popup">
         <div class="user_form_wrapper">
+            <button class="close" onclick="closeAddRecordPopUp()">&times;</button>
+            <p class="popup_header">Add Record</p>
+            <p id="validation_adding_error_message" class="hidden error_msg">
+                All fields are required and should not contain numbers
+            </p>
             <div class="form_input">
                 <p>First name:</p>
                 <input id="first_name_input" type="text"> 
@@ -30,17 +31,20 @@
                 <p>City:</p>
                 <input id="city_input" type="text">
             </div>
-            <button id="add_action" class="add_action" onclick="addUser()">+Add</button>
-            <button class="close_popup_action" onclick="closeAddRecordPopUp()">Cancel</button>
+            <div class="popup_actions">
+                <button class="close_popup_action" onclick="closeAddRecordPopUp()">Close</button>
+                <button id="add_action" class="add_action" onclick="addUser()">+Add</button>          
+            </div>
         </div>
     </div>
 
-    <p id="validation_editing_error_message" class="hidden error_msg">
-        All fields are required and should not contain numbers
-    </p>
-
     <div id="edit_record_popup" class="hidden popup">
         <div class="user_form_wrapper">
+            <button class="close" onclick="closeEditPopup()">&times;</button>
+            <p class="popup_header">Edit Record</p>
+            <p id="validation_editing_error_message" class="hidden error_msg">
+                All fields are required and should not contain numbers
+            </p>
             <div class="form_input">
                 <p>First name:</p>
                 <input id="editable_first_name" type="text" placeholder="First Name"> 
@@ -53,8 +57,10 @@
                 <p>City:</p>
                 <input id="editable_city" type="text" placeholder="City">
             </div>
-            <button id="save_record" class="add_action" onclick="editRecord()">Save</button>
-            <button class="close_popup_action" onclick="closeEditPopup()">Cancel</button>
+            <div class="popup_actions">
+                <button class="close_popup_action" onclick="closeEditPopup()">Close</button>
+                <button id="save_record" class="add_action" onclick="editRecord()">Save</button>
+            </div>
         </div>
     </div>
 
@@ -94,18 +100,21 @@
                     </tr>
                 </thead>
                 <tbody id="table_body"></tbody>
+                
             </table>
-            <p id="no_data_msg">No data</p>
-            <!-- <div class="pagination flex-row">
-                <p class="align_from_left" id = "page_count">Page 1 out of 1</p>
-                <div id="page_number"class="align_from_right">
-                    <button><</button>
-                    <button>1</button>
-                    <button>></button>
-                </div> -->
+            <p id="no_data_msg">No data</p>   
         </div>
-    </div>
 
+        <div class="pagination container_row_style">
+            <p class="align_from_left" id="page_count">Page 1 out of 1</p>
+            <div id="page_number" class="align_from_right">
+                <button><</button>
+                <button>1</button>
+                <button>></button>
+            </div>
+        </div>
+        
+    </div>
     <script src="main.js"></script>
 </body>
 </html>

@@ -30,11 +30,41 @@ body{
     justify-content: center;
 }
 
-.user_form_wrapper{    
+.user_form_wrapper{  
+    margin:20px auto;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    width: 600px;
+    height:400px;
     display:flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.close{
+    width:40px;
+    height:40px;
+    align-self: flex-end;
+    background: none;
+    border:none;
+    outline: none;
+    cursor: pointer;
+    font-size: 18px;
+    position: absolute;
+    top:40px
+}
+.popup_header{
+    padding-left: 50px;
+    background-color: #f4f4f4;
+    height:50px;
+    padding-top:15px;
+}
+
+.popup_actions{
+    align-self: flex-end;
+    margin-right: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #container{
@@ -42,7 +72,6 @@ body{
     background-color: white;
     display: flex;
     align-items: center;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     margin:20px auto;
@@ -113,7 +142,7 @@ select{
 }
 
 .form_input{
-    margin-bottom: 50px;
+    padding-left: 50px;
 }
 
 .hidden{
@@ -122,29 +151,27 @@ select{
 
 .edited_error_msg, .error_msg{
     color:rgb(99, 29, 29);
-    font-size:22px;
-    margin-top:150px;
+    font-size:18px;
+    position: absolute;
     text-align:center;
+    top:70px;
+    left:500px
 }
 
 .popup{
-    position:absolute;
-    width:90%;
-    top:200px;
-    left:50px;
-    background-color: white;
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
     z-index: 1;
-    border:1px #1f5d8f solid;
-    padding:20px 0;
-}
-
-.popup form{
-    width:70%;
-    margin-left:-7%
+    border: 1px #1f5d8f solid;
 }
 
 .popup input{
-    width:80%;
+    width:90%;
     height:30px;
     padding-left:5px;
     border-radius: 5px;
@@ -170,7 +197,7 @@ select{
     width:60px;
     height:35px;
     border:1px solid white;
-    background-color: red;
+    background-color: #888;
     border-radius: 5px;
     color:white;
     cursor:pointer;
@@ -217,7 +244,7 @@ select{
     background-color: #f4f4f4;
     font-weight: 300;
     color:#685e60;
-    margin:0
+    width:100%
 }
 
 .pagination button{

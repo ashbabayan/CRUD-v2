@@ -14,6 +14,7 @@ var editableFirstNameInput = document.getElementById("editable_first_name");
 var editableLastNameInput = document.getElementById("editable_last_name");
 var editableCityInput = document.getElementById("editable_city");
 var searchInput = document.getElementById("searchbox");
+var pageRowsQty = document.getElementById("page_rows_count")
 var numbers = /\d/;
 const d = new Date();
 var data = [];
@@ -41,6 +42,10 @@ const toggleEmptyDataMsg = () => {
     } else if (table.rows.length == 1 && noDataMsg.classList.contains("hidden")) {
         noDataMsg.classList.remove("hidden");
     }
+}
+
+const setRowsQty = () => {
+
 }
 
 const clearInputValues = () => {
@@ -178,7 +183,7 @@ const addUser = () => {
         return
     }
     data.push(user);
-    render(data);
+    render(data)
     closeAddRecordPopUp();
 }
 
@@ -200,3 +205,4 @@ const search = () => {
     })
     render(searchedData)
 }
+
