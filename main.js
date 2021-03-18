@@ -66,8 +66,12 @@ window.onclick = function(event) {
         popUp.classList.add("hidden");
         mainContainer.style.opacity= "1";
         clearInputValues()        
-    } else if(event.target == deleteConfirmPopup) {
+    } else if (event.target == deleteConfirmPopup) {
         deleteConfirmPopup.classList.add("hidden");
+        mainContainer.style.opacity = "1";
+        clearInputValues()
+    } else if (event.target == editPopup) {
+        editPopup.classList.add("hidden");
         mainContainer.style.opacity = "1";
         clearInputValues()
     }
