@@ -16,13 +16,100 @@ var editableLastNameInput = document.getElementById("editable_last_name");
 var editableCityInput = document.getElementById("editable_city");
 var searchInput = document.getElementById("searchbox");
 var pageRowsQty = document.getElementById("page_rows_count")
+var pageCountBtns = document.getElementById("page_number")
+var limit  = pageRowsQty.value;
 var numbers = /\d/;
 
 const d = new Date();
-var data = [];
+var data = [
+    {
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },
+    {
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },
+    {
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },
+    {
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },
+    {
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },
+    {
+        'firstname':'aa',
+        'lastname':'bb',
+        'city':'cc',
+    },{
+        'firstname':'aa',
+        'lastname':'b',
+        'city':'c',
+    },{
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },{
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },{
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },{
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },{
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },{
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },{
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },{
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },{
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },{
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },{
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },{
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },{
+        'firstname':'a',
+        'lastname':'b',
+        'city':'c',
+    },
+];
 var userIndex;
-
-
 
 const closeConfirmPopup = () => {
     deleteConfirmPopup.classList.add("hidden")
@@ -51,8 +138,24 @@ const toggleEmptyDataMsg = () => {
     }
 }
 
-const setRowsQty = () => {
+const truncateArray = (array, offset, limit) => {  
+    var slicedArray = array.slice(offset, offset + limit)
+    return slicedArray
+}
+    
+const pagination = (data,limit) => {
+    for (let i=0; i<1; i++) {
+        if (data.length%limit===1) {          
+            pageCountBtns.innerHTML += `<button>${Math.ceil(data.length/limit)}</button>`
+        }
+    }
+}
 
+const changePage = () => {
+    truncateArray(data,((event.target.innerHTML*pageRowsQty.value)-pageRowsQty.value), pageRowsQty.value )
+    
+    render(data)
+    console.log(truncateArray(data,((event.target.innerHTML*pageRowsQty.value)-pageRowsQty.value), pageRowsQty.value ))
 }
 
 const clearInputValues = () => {
@@ -135,9 +238,8 @@ const createEditButton = (index) => {
 const deleteRecord = (index) => {
     data.splice(index, 1);
             render(data);
-            closeConfirmPopup ()
+            closeConfirmPopup ();
 }
-
 
 const createDeleteButton = (index) => {
     var deleteButton = document.createElement("button");
@@ -182,7 +284,8 @@ const render = (data) => {
     while (table.rows.length > 1) { 
         table.deleteRow(1);
     }
-    data.forEach ((row, index) => {
+    var truncatedData = truncateArray(data, 0, pageRowsQty.value)
+    truncatedData.forEach ((row, index) => {
         var userRow = createUserRow()
         var fullNameCell = document.createElement("td");
         var cityNameCell = document.createElement("td");
@@ -198,7 +301,8 @@ const render = (data) => {
         userRow.appendChild(actions);
         tableBody.appendChild(userRow);
     });
-    toggleEmptyDataMsg()
+    //pagination(data, pageRowsQty.value);
+    toggleEmptyDataMsg();
 }
 
 const addUser = () => {

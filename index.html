@@ -89,7 +89,7 @@
         <div id="search_container" class="container_row_style">
             <p class="align_from_left">
                 Show
-                <select id="page_rows_count">
+                <select id="page_rows_count" onchange="render(data)">
                     <option>5</option>
                     <option>10</option>
                     <option>20</option>
@@ -122,9 +122,10 @@
         <div class="pagination container_row_style">
             <p class="align_from_left" id="page_count">Page 1 out of 1</p>
             <div id="page_number" class="align_from_right">
-                <button><</button>
-                <button>1</button>
-                <button>></button>
+                <button onclick="changePage()">1</button>
+                <button onclick="changePage()">2</button>
+                <button onclick="changePage()">3</button>
+                <button onclick="changePage()">4</button>
             </div>
         </div>
         
