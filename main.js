@@ -76,7 +76,7 @@ var data = [
         'lastname':'b',
         'city':'c',
     },{
-        'firstname':'a',
+        'firstname':'aaaaa',
         'lastname':'b',
         'city':'c',
     },{
@@ -104,7 +104,7 @@ var data = [
         'lastname':'b',
         'city':'c',
     },{
-        'firstname':'a',
+        'firstname':'aaaaaaaaaa',
         'lastname':'b',
         'city':'c',
     },
@@ -152,9 +152,9 @@ const pagination = (data,limit) => {
 }
 
 const changePage = () => {
-    truncateArray(data,((event.target.innerHTML*pageRowsQty.value)-pageRowsQty.value), pageRowsQty.value )
+    var truncatedData = truncateArray(data,((event.target.innerHTML*pageRowsQty.value)-pageRowsQty.value), pageRowsQty.value )
     
-    render(data)
+    render(truncatedData)
     console.log(truncateArray(data,((event.target.innerHTML*pageRowsQty.value)-pageRowsQty.value), pageRowsQty.value ))
 }
 
