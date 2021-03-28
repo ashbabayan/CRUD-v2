@@ -16,95 +16,100 @@ var editableLastNameInput = document.getElementById("editable_last_name");
 var editableCityInput = document.getElementById("editable_city");
 var searchInput = document.getElementById("searchbox");
 var pageRowsQty = document.getElementById("page_rows_count")
-var pageCountBtns = document.getElementById("page_number")
-var limit  = pageRowsQty.value;
+var paginationWrapper = document.getElementById("pagination_wrapper")
+
 var numbers = /\d/;
+
+const pagination = {
+    limit: 5,
+    offset: 0,
+}
 
 const d = new Date();
 var data = [
     {
-        'firstname':'a',
+        'firstname':'1',
         'lastname':'b',
         'city':'c',
     },
     {
-        'firstname':'a',
+        'firstname':'2',
         'lastname':'b',
         'city':'c',
     },
     {
-        'firstname':'a',
+        'firstname':'3',
         'lastname':'b',
         'city':'c',
     },
     {
-        'firstname':'a',
+        'firstname':'4',
         'lastname':'b',
         'city':'c',
     },
     {
-        'firstname':'a',
+        'firstname':'5',
         'lastname':'b',
         'city':'c',
     },
     {
-        'firstname':'aa',
+        'firstname':'6',
         'lastname':'bb',
         'city':'cc',
     },{
-        'firstname':'aa',
+        'firstname':'7',
         'lastname':'b',
         'city':'c',
     },{
-        'firstname':'a',
+        'firstname':'8',
         'lastname':'b',
         'city':'c',
     },{
-        'firstname':'a',
+        'firstname':'9',
         'lastname':'b',
         'city':'c',
     },{
-        'firstname':'a',
+        'firstname':'10',
         'lastname':'b',
         'city':'c',
     },{
-        'firstname':'a',
+        'firstname':'11',
         'lastname':'b',
         'city':'c',
     },{
-        'firstname':'a',
+        'firstname':'12',
         'lastname':'b',
         'city':'c',
     },{
-        'firstname':'aaaaa',
+        'firstname':'13',
         'lastname':'b',
         'city':'c',
     },{
-        'firstname':'a',
+        'firstname':'14',
         'lastname':'b',
         'city':'c',
     },{
-        'firstname':'a',
+        'firstname':'15',
         'lastname':'b',
         'city':'c',
     },{
-        'firstname':'a',
+        'firstname':'16',
         'lastname':'b',
         'city':'c',
     },{
-        'firstname':'a',
+        'firstname':'17',
+        'lastname':'18',
+        'city':'c',
+    },{
+        'firstname':'19',
         'lastname':'b',
         'city':'c',
     },{
-        'firstname':'a',
+        'firstname':'20',
         'lastname':'b',
         'city':'c',
     },{
-        'firstname':'a',
-        'lastname':'b',
-        'city':'c',
-    },{
-        'firstname':'aaaaaaaaaa',
+        'firstname':'21',
         'lastname':'b',
         'city':'c',
     },
@@ -114,6 +119,7 @@ var userIndex;
 const closeConfirmPopup = () => {
     deleteConfirmPopup.classList.add("hidden")
 }
+
 const checkAddRecordValidation = () => {
     return (!(firstNameInput.value && lastNameInput.value && cityNameInput.value));
 }
@@ -138,25 +144,7 @@ const toggleEmptyDataMsg = () => {
     }
 }
 
-const truncateArray = (array, offset, limit) => {  
-    var slicedArray = array.slice(offset, offset + limit)
-    return slicedArray
-}
-    
-const pagination = (data,limit) => {
-    for (let i=0; i<1; i++) {
-        if (data.length%limit===1) {          
-            pageCountBtns.innerHTML += `<button>${Math.ceil(data.length/limit)}</button>`
-        }
-    }
-}
-
-const changePage = () => {
-    var truncatedData = truncateArray(data,((event.target.innerHTML*pageRowsQty.value)-pageRowsQty.value), pageRowsQty.value )
-    
-    render(truncatedData)
-    console.log(truncateArray(data,((event.target.innerHTML*pageRowsQty.value)-pageRowsQty.value), pageRowsQty.value ))
-}
+const getTruncatedArray = (array, offset, limit) => array.slice(offset, offset + limit)
 
 const clearInputValues = () => {
     firstNameInput.value = "";
@@ -231,14 +219,14 @@ const createEditButton = (index) => {
             editableLastNameInput.value = data[index].lastname;
             editableCityInput.value = data[index].city;
             userIndex = index;
-        })
+        });
     return editButton
 }
 
 const deleteRecord = (index) => {
     data.splice(index, 1);
-            render(data);
-            closeConfirmPopup ();
+    render(data);
+    closeConfirmPopup();
 }
 
 const createDeleteButton = (index) => {
@@ -259,33 +247,34 @@ const createActionsColumn = (index) => {
         actions.classList.add("actions");
         actions.appendChild(editButton);
         actions.appendChild(deleteButton);
-    return actions
+    return actions;
 }
 
 const createDate = () => {
     var date = document.createElement("td");
         date.innerHTML = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDay();
-    return date
+    return date;
 }
 
 const createTime = () => {
     var time = document.createElement("td");
         time.innerHTML = d.getHours() + ":" + d.getMinutes();
-    return time
+    return time;
 }
 
 const createUserRow = () => {
     var userRow = document.createElement("tr");
         userRow.classList.add("user_record");
-    return userRow
+    return userRow;
 }
 
 const render = (data) => {
     while (table.rows.length > 1) { 
         table.deleteRow(1);
     }
-    var truncatedData = truncateArray(data, 0, pageRowsQty.value)
-    truncatedData.forEach ((row, index) => {
+
+    var chunk = getTruncatedArray(data, pagination.offset, pagination.limit)
+    chunk.forEach ((row, index) => {
         var userRow = createUserRow()
         var fullNameCell = document.createElement("td");
         var cityNameCell = document.createElement("td");
@@ -301,7 +290,6 @@ const render = (data) => {
         userRow.appendChild(actions);
         tableBody.appendChild(userRow);
     });
-    //pagination(data, pageRowsQty.value);
     toggleEmptyDataMsg();
 }
 
@@ -316,7 +304,7 @@ const addUser = () => {
         return
     }
     data.push(user);
-    render(data)
+    render(data);
     closeAddRecordPopUp();
 }
 
@@ -329,12 +317,42 @@ const editRecord = () => {
     data[userIndex].lastname = editableLastNameInput.value;
     data[userIndex].city = editableCityInput.value;
     render(data);
-    closeEditPopup()
+    closeEditPopup();
 }
 
 const search = () => {
     const searchedData = data.filter (row  => {
        return row.firstname.toLowerCase().includes(searchInput.value.toLowerCase()) || row.lastname.toLowerCase().includes(searchInput.value.toLowerCase())
     })
-    render(searchedData)
+    render(searchedData);
 }
+
+const changeLimit = () => {
+    pagination.limit = parseInt(pageRowsQty.value, 10);
+    renderPagination();
+    render(data);
+}
+
+const changeOffset = (e) => {
+    pagination.offset = e * pagination.limit;
+    render(data);
+}
+
+const renderPagination = () => {
+    while (paginationWrapper.firstChild) {
+        paginationWrapper.removeChild(paginationWrapper.firstChild);
+    }
+    const length = data.length;
+    const limit = pagination.limit;
+    const pageAmount = length / limit;
+    
+    new Array(pageAmount).fill(null).forEach((_, index) => {
+        const paginationControl = document.createElement('button');
+        paginationControl.innerHTML = index + 1;
+        paginationControl.addEventListener('click', () => changeOffset(index));
+        paginationWrapper.appendChild(paginationControl);
+    });
+}
+
+render(data);
+renderPagination();
