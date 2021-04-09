@@ -28,89 +28,89 @@ const pagination = {
 const d = new Date();
 var data = [
     {
-        'firstname':'1',
-        'lastname':'b',
+        'firstname':'Katerina',
+        'lastname':'Carroll',
         'city':'c',
     },
     {
-        'firstname':'2',
-        'lastname':'b',
+        'firstname':'Tyrique',
+        'lastname':'Millar',
         'city':'c',
     },
     {
-        'firstname':'3',
-        'lastname':'b',
+        'firstname':'Ellenor',
+        'lastname':'Britton',
         'city':'c',
     },
     {
-        'firstname':'4',
-        'lastname':'b',
+        'firstname':'Charli',
+        'lastname':'Chambers',
         'city':'c',
     },
     {
-        'firstname':'5',
-        'lastname':'b',
+        'firstname':'Dev',
+        'lastname':'Bone',
         'city':'c',
     },
     {
-        'firstname':'6',
-        'lastname':'bb',
+        'firstname':'Mateusz',
+        'lastname':'Stanley',
         'city':'cc',
     },{
-        'firstname':'7',
-        'lastname':'b',
+        'firstname':'Fabian',
+        'lastname':'Hart',
         'city':'c',
     },{
-        'firstname':'8',
-        'lastname':'b',
+        'firstname':'Maisie',
+        'lastname':'Hawkins',
         'city':'c',
     },{
-        'firstname':'9',
-        'lastname':'b',
+        'firstname':'Shuaib',
+        'lastname':'Wilde',
         'city':'c',
     },{
-        'firstname':'10',
-        'lastname':'b',
+        'firstname':'Tomas',
+        'lastname':'Tomas',
         'city':'c',
     },{
-        'firstname':'11',
-        'lastname':'b',
+        'firstname':'Conal',
+        'lastname':'Velazquez',
         'city':'c',
     },{
-        'firstname':'12',
-        'lastname':'b',
+        'firstname':'Arham',
+        'lastname':'Wharton',
         'city':'c',
     },{
-        'firstname':'13',
-        'lastname':'b',
+        'firstname':'Osman',
+        'lastname':'Kavanagh',
         'city':'c',
     },{
-        'firstname':'14',
-        'lastname':'b',
+        'firstname':'Abbey',
+        'lastname':'Irwin',
         'city':'c',
     },{
-        'firstname':'15',
-        'lastname':'b',
+        'firstname':'Alessia',
+        'lastname':'Knott',
         'city':'c',
     },{
-        'firstname':'16',
-        'lastname':'b',
+        'firstname':'Catriona',
+        'lastname':'Osborne',
         'city':'c',
     },{
-        'firstname':'17',
-        'lastname':'18',
+        'firstname':'Grayson',
+        'lastname':'Mcgowan',
         'city':'c',
     },{
-        'firstname':'19',
-        'lastname':'b',
+        'firstname':'Maggie',
+        'lastname':'Crowther',
         'city':'c',
     },{
-        'firstname':'20',
-        'lastname':'b',
+        'firstname':'Mica',
+        'lastname':'Townsend',
         'city':'c',
     },{
-        'firstname':'21',
-        'lastname':'b',
+        'firstname':'Eleri',
+        'lastname':'Gillespie',
         'city':'c',
     },
 ];
@@ -215,18 +215,21 @@ const createEditButton = (index) => {
         editButton.setAttribute("id", 'edit_action');
         editButton.addEventListener("click", (e) => {
             openEditPopup();
-            editableFirstNameInput.value = data[index].firstname;
-            editableLastNameInput.value = data[index].lastname;
-            editableCityInput.value = data[index].city;
+            var chunk = getTruncatedArray(data, pagination.offset, pagination.limit)
+            editableFirstNameInput.value = chunk[index].firstname;
+            editableLastNameInput.value = chunk[index].lastname;
+            editableCityInput.value = chunk[index].city;
             userIndex = index;
         });
     return editButton
 }
 
-const deleteRecord = (index) => {
-    data.splice(index, 1);
+const deleteRecord = (e) => {
+    var chunk = getTruncatedArray(data, pagination.offset, pagination.limit)
+    //chunk.splice(index, 1);
     render(data);
     closeConfirmPopup();
+    console.log(e.target)
 }
 
 const createDeleteButton = (index) => {
@@ -274,7 +277,7 @@ const render = (data) => {
     }
 
     var chunk = getTruncatedArray(data, pagination.offset, pagination.limit)
-    chunk.forEach ((row, index) => {
+        chunk.forEach ((row, index) => {
         var userRow = createUserRow()
         var fullNameCell = document.createElement("td");
         var cityNameCell = document.createElement("td");
@@ -312,10 +315,11 @@ const editRecord = () => {
     if (checkEditRecordValidation() || checkEditedNumberValidation()) {
         invalidEditErrorMsg.classList.remove("hidden")
         return
-    } 
-    data[userIndex].firstname = editableFirstNameInput.value;
-    data[userIndex].lastname = editableLastNameInput.value;
-    data[userIndex].city = editableCityInput.value;
+    }
+    var chunk = getTruncatedArray(data, pagination.offset, pagination.limit) 
+    chunk[userIndex].firstname = editableFirstNameInput.value;
+    chunk[userIndex].lastname = editableLastNameInput.value;
+    chunk[userIndex].city = editableCityInput.value;
     render(data);
     closeEditPopup();
 }

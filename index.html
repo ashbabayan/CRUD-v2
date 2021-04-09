@@ -14,22 +14,26 @@
 <body>
     <div id="add_record_popup" class="hidden popup">
         <div class="user_form_wrapper">
-            <button class="close" onclick="closeAddRecordPopUp()">&times;</button>
-            <p class="popup_header">Add Record</p>
-            <p id="validation_adding_error_message" class="hidden error_msg">
-                All fields are required and should not contain numbers
-            </p>
-            <div class="form_input">
-                <p>First name:</p>
-                <input id="first_name_input" type="text"> 
+            <div class="user_form_header">
+                <p class="popup_header">Add Record</p>
+                <button class="close" onclick="closeAddRecordPopUp()">&times;</button>
             </div>
-            <div class="form_input"> 
-                <p>Last Name:</p>
-                <input id="last_name_input" type="text">
-            </div>
-            <div class="form_input">
-                <p>City:</p>
-                <input id="city_input" type="text">
+            <div class="user_form_body">
+                <p id="validation_adding_error_message" class="hidden error_msg">
+                    All fields are required and should not contain numbers
+                </p>
+                <div class="form_input">
+                    <p>First name:</p>
+                    <input id="first_name_input" type="text"> 
+                </div>
+                <div class="form_input"> 
+                    <p>Last Name:</p>
+                    <input id="last_name_input" type="text">
+                </div>
+                <div class="form_input">
+                    <p>City:</p>
+                    <input id="city_input" type="text">
+                </div>
             </div>
             <div class="popup_actions">
                 <button class="close_popup_action" onclick="closeAddRecordPopUp()">Close</button>
@@ -40,22 +44,26 @@
 
     <div id="edit_record_popup" class="hidden popup">
         <div class="user_form_wrapper">
-            <button class="close" onclick="closeEditPopup()">&times;</button>
-            <p class="popup_header">Edit Record</p>
-            <p id="validation_editing_error_message" class="hidden error_msg">
-                All fields are required and should not contain numbers
-            </p>
-            <div class="form_input">
-                <p>First name:</p>
-                <input id="editable_first_name" type="text" placeholder="First Name"> 
+            <div class="user_form_header">
+                <p class="popup_header">Edit Record</p>
+                <button class="close" onclick="closeEditPopup()">&times;</button>
             </div>
-            <div class="form_input"> 
-                <p>Last Name:</p>
-                <input id="editable_last_name" type="text" placeholder="Last Name">
-            </div>
-            <div class="form_input">
-                <p>City:</p>
-                <input id="editable_city" type="text" placeholder="City">
+                <p id="validation_editing_error_message" class="hidden error_msg">
+                    All fields are required and should not contain numbers
+                </p>
+                <div class="user_form_body">
+                <div class="form_input">
+                    <p>First name:</p>
+                    <input id="editable_first_name" type="text" placeholder="First Name"> 
+                </div>
+                <div class="form_input"> 
+                    <p>Last Name:</p>
+                    <input id="editable_last_name" type="text" placeholder="Last Name">
+                </div>
+                <div class="form_input">
+                    <p>City:</p>
+                    <input id="editable_city" type="text" placeholder="City">
+                </div>
             </div>
             <div class="popup_actions">
                 <button class="close_popup_action" onclick="closeEditPopup()">Close</button>
